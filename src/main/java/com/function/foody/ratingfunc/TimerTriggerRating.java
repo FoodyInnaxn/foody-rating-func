@@ -52,9 +52,14 @@ public class TimerTriggerRating {
                     String recipeId = recipe.getString("id");
                     double rating = recipe.getDouble("rating");
                     int numberSaved = recipe.getInt("numberSaved");
+                    double newRating = 0;
 
                     // Calculate new average rating using numberSaved
-                    double newRating = (rating * numberSaved + numberSaved) / (numberSaved + 1);
+                    if(rating <= 0){
+                        newRating = (numberSaved * numberSaved) / 100;
+                    }else{
+                        newRating = (rating * numberSaved + numberSaved) / (numberSaved + 1);
+                    }
 
                     // Update the recipe with the new average rating 
                     // recipe/" + recipeId + "/rating?rating=" + newRating
